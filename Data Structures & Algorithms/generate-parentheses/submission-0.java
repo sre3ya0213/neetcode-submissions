@@ -1,0 +1,28 @@
+class Solution {
+    List<String> res;
+    StringBuilder sb;
+    public void backtrack(int n,int open,int close) {
+        if(open == n && close == n) {
+            res.add(sb.toString());
+            return;
+        }
+        if(open < n) {
+            sb.append("(");
+            backtrack(n,open+1,close);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        if(close < open) {
+            sb.append(")");
+            backtrack(n,open,close+1);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+    }
+    public List<String> generateParenthesis(int n) {
+        res = new ArrayList<>();
+        sb = new StringBuilder();
+        backtrack(n,0,0);
+        return res;
+    }
+
+}
